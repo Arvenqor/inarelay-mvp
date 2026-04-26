@@ -23,6 +23,23 @@ Open:
 http://127.0.0.1:3000
 ```
 
+## Deployment
+
+GitHub source:
+
+```text
+https://github.com/InaRelay/inarelay-mvp
+```
+
+Deploy from Vercel by importing the GitHub repository as a Next.js project. Use the default Vercel build settings:
+
+- Install command: `npm install`
+- Build command: `npm run build`
+- Output directory: Vercel default
+- Node.js version: `24.x`
+
+No production database credentials are required yet. The validation endpoint is intentionally stubbed until Supabase or Neon persistence is connected.
+
 ## Validation Storage
 
 The current `/api/validation-response` route accepts MVP validation submissions and returns a success response. The next step is to connect it to Postgres tables:
