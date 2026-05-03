@@ -1,8 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #f6f3ec;
-  --foreground: #1c1917;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --ir-ink: #0f172a;
+  --ir-teal: #0d9488;
+  --ir-teal-light: #ccfbf1;
+  --ir-amber: #f59e0b;
+  --ir-amber-light: #fef3c7;
+  --ir-muted: #64748b;
+  --ir-surface: #ffffff;
+  --ir-border: #e2e8f0;
+  --ir-green: #059669;
+  --ir-rose: #e11d48;
+  --ir-hero-bg: #eef8f6;
 }
 
 @theme inline {
@@ -13,80 +25,132 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Satoshi", "Aptos", "Segoe UI", sans-serif;
+  font-family: "Inter", "Satoshi", "Aptos", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 button,
+input,
+select,
 textarea {
   font: inherit;
 }
 
+/* ─── Grid glow ─── */
 .grid-glow {
   background:
-    linear-gradient(rgba(28, 25, 23, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(28, 25, 23, 0.05) 1px, transparent 1px),
-    radial-gradient(circle at 12% 20%, rgba(251, 191, 36, 0.2), transparent 32%),
-    radial-gradient(circle at 84% 16%, rgba(20, 184, 166, 0.14), transparent 28%);
-  background-size: 42px 42px, 42px 42px, auto, auto;
+    linear-gradient(rgba(13, 148, 136, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13, 148, 136, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at 12% 20%, rgba(13, 148, 136, 0.14), transparent 36%),
+    radial-gradient(circle at 88% 14%, rgba(245, 158, 11, 0.10), transparent 30%),
+    radial-gradient(circle at 55% 88%, rgba(99, 102, 241, 0.08), transparent 28%);
+  background-size: 40px 40px, 40px 40px, auto, auto, auto;
 }
 
+/* ─── Animations ─── */
 .motion-rise {
   animation: motion-rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-
 .motion-reveal {
   animation: motion-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-
+.motion-fade {
+  animation: motion-fade 500ms ease both;
+}
 .flow-sheen {
-  background: linear-gradient(105deg, transparent 18%, rgba(255, 255, 255, 0.24) 45%, transparent 68%);
+  background: linear-gradient(105deg, transparent 18%, rgba(255,255,255,0.24) 45%, transparent 68%);
   transform: translateX(-120%);
   animation: flow-sheen 4.8s ease-in-out 900ms infinite;
 }
 
+/* ─── Pulse dot (live indicator) ─── */
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ir-teal);
+  position: relative;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--ir-teal);
+  opacity: 0.3;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ─── Glass card ─── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* ─── Gradient text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--ir-teal) 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── WA bubble ─── */
+.wa-bubble-in {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0 12px 12px 12px;
+}
+.wa-bubble-out {
+  background: #dcf8c6;
+  border-radius: 12px 0 12px 12px;
+}
+.wa-bubble-system {
+  background: #f0fdf4;
+  border: 1px dashed #86efac;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ─── Keyframes ─── */
 @keyframes motion-rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes motion-reveal {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes motion-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes flow-sheen {
+  0%, 45% { transform: translateX(-120%); }
+  70%, 100% { transform: translateX(120%); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.3; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes bar-grow {
+  from { width: 0; }
 }
 
-@keyframes flow-sheen {
-  0%,
-  45% {
-    transform: translateX(-120%);
-  }
-
-  70%,
-  100% {
-    transform: translateX(120%);
-  }
+/* ─── SVG bar chart animation ─── */
+.bar-animated {
+  animation: bar-grow 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
   }
 }
+
