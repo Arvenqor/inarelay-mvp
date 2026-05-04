@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import {
-  operatorCases, operatorSegments, portfolioSignals, reportingPacks,
+  operatorCases, operatorSegments, reportingPacks,
   resolutionOutcomes, rootCauseSummary, ageingBuckets,
   type EvidenceStatus, type ExceptionType, type OperatorCase,
 } from "@/lib/demo-data";

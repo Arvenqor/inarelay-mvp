@@ -1,42 +1,9 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { validationQuestions, segmentFastTrackQuestions } from "@/lib/demo-data";
+import { validationQuestions, segmentFastTrackQuestions, pilotTiers } from "@/lib/demo-data";
 import { OperatorCase } from "@/lib/demo-data";
 
-// Pilot tiers — signal pricing only (specific naira amounts are unvalidated at MVP stage)
-const pilotTiers = [
-  {
-    name: "Discovery Pilot",
-    duration: "30 days",
-    scope: "Up to 200 accounts",
-    price: "Free",
-    priceNote: "No commitment required",
-    includes: ["Exception desk setup", "Sample case seeding from your data", "2 validation review calls"],
-    ideal: "Operators wanting to test fit before committing",
-    cta: "Apply for a discovery pilot",
-  },
-  {
-    name: "Operations Pilot",
-    duration: "60 days",
-    scope: "Up to 1,000 accounts",
-    price: "Scoped to operator",
-    priceNote: "Quoted after a 30-min scoping call",
-    includes: ["Full exception ops + portfolio view", "Collections + support workflow", "Weekly review call", "Management report export"],
-    ideal: "Operators ready to move cases off spreadsheets",
-    cta: "Book a scoping call",
-  },
-  {
-    name: "Enterprise Pilot",
-    duration: "90 days",
-    scope: "Unlimited accounts",
-    price: "Custom",
-    priceNote: "Tailored to operator scale and integration needs",
-    includes: ["All features", "Verification pack builder", "Lender / grant reporting exports", "Dedicated pilot support"],
-    ideal: "Mini-grid and grant-backed operators with reporting obligations",
-    cta: "Book a scoping call",
-  },
-];
 
 // ─── Segment Fast-Track (Layer 2) ─────────────────────────────────────────────
 
@@ -140,14 +107,8 @@ function ValidationPanel({ selectedCase, activeView }: { selectedCase: OperatorC
         <p className="text-4xl">✅</p>
         <h3 className="mt-4 text-xl font-bold text-slate-900">Validation signal captured</h3>
         <p className="mt-2 text-sm text-slate-600">
-          We'll review your response and reach out at <strong>{lead.workEmail || "your email"}</strong> if you opted in for a pilot call.
+          We&apos;ll review your response and reach out at <strong>{lead.workEmail || "your email"}</strong> if you opted in for a pilot call.
         </p>
-        <a
-          href={`mailto:adelekedare2012@gmail.com?subject=InaRelay pilot enquiry from ${lead.operatorName || "operator"}`}
-          className="mt-5 inline-block rounded-xl bg-slate-900 px-6 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
-        >
-          Book a pilot call directly →
-        </a>
       </div>
     );
   }
@@ -228,16 +189,10 @@ function ValidationPanel({ selectedCase, activeView }: { selectedCase: OperatorC
         <button
           type="submit"
           disabled={submitting}
-          className="flex-1 rounded-xl bg-amber-400 py-3 text-sm font-bold text-slate-900 transition hover:bg-amber-300 disabled:opacity-50"
+          className="w-full rounded-xl bg-amber-400 py-3 text-sm font-bold text-slate-900 transition hover:bg-amber-300 disabled:opacity-50"
         >
           {submitting ? "Saving..." : "Save validation signal"}
         </button>
-        <a
-          href={`mailto:adelekedare2012@gmail.com?subject=InaRelay pilot enquiry`}
-          className="flex-1 rounded-xl border border-slate-900 bg-white py-3 text-center text-sm font-bold text-slate-900 transition hover:bg-slate-50"
-        >
-          Book a pilot call directly →
-        </a>
       </div>
     </form>
   );
@@ -293,7 +248,7 @@ export function ConversionSection({
               </ul>
               <p className="mt-4 text-xs text-slate-500 italic">{tier.ideal}</p>
               <a
-                href={`mailto:adelekedare2012@gmail.com?subject=${encodeURIComponent(tier.cta + " — InaRelay")}`}
+                href="#pilot-signal"
                 className={`mt-6 block rounded-xl py-3 text-center text-sm font-bold transition ${
                   i === 1
                     ? "bg-teal-600 text-white hover:bg-teal-500"

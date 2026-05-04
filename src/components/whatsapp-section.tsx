@@ -15,7 +15,7 @@ export function WhatsAppSection() {
               Your customers are already on WhatsApp. InaRelay meets them there.
             </h2>
             <p className="mt-5 text-base leading-7 text-slate-600">
-              When a customer sends a payment complaint, InaRelay's AI parsing layer reads the message, matches the payment reference, checks for linked service faults, and auto-creates a structured ticket — without your support team having to chase context.
+              When a customer sends a payment complaint, InaRelay&apos;s AI parsing layer reads the message, matches the payment reference, checks for linked service faults, and auto-creates a structured ticket — without your support team having to chase context.
             </p>
             <div className="mt-8 space-y-4">
               {[

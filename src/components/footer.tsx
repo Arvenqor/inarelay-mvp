@@ -2,7 +2,7 @@
 
 export function Footer() {
   const processSteps = [
-    { n: "01", label: "Apply", detail: "Send a pilot signal or email us directly." },
+    { n: "01", label: "Apply", detail: "Send a pilot signal through the form." },
     { n: "02", label: "Scoping call", detail: "30-min call to map your operation to InaRelay workflows." },
     { n: "03", label: "30-day pilot", detail: "Live accounts, real resolution, measurable outcomes." },
     { n: "04", label: "Review", detail: "We show you what changed. You decide if it's worth scaling." },
@@ -39,7 +39,7 @@ export function Footer() {
             <span className="font-bold">InaRelay</span>
           </div>
           <div className="flex flex-wrap gap-4 text-sm text-slate-400">
-            <a href="mailto:adelekedare2012@gmail.com" className="transition hover:text-white">pilots@inarelay.com</a>
+            <a href="#pilot-signal" className="transition hover:text-white">Pilot interest form</a>
             <span>Lagos, Nigeria</span>
           </div>
           <p className="text-xs text-slate-600">
