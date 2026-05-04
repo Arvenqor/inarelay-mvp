@@ -1,5 +1,25 @@
 import { NextResponse } from "next/server";
 
+function payloadForWebhook(payload: unknown) {
+  const secret = process.env.VALIDATION_WEBHOOK_SECRET;
+
+  if (!secret) {
+    return payload;
+  }
+
+  if (payload && typeof payload === "object" && !Array.isArray(payload)) {
+    return {
+      ...payload,
+      _inarelaySecret: secret,
+    };
+  }
+
+  return {
+    payload,
+    _inarelaySecret: secret,
+  };
+}
+
 async function forwardToWebhook(payload: unknown) {
   const webhookUrl = process.env.VALIDATION_WEBHOOK_URL;
 
@@ -20,11 +40,21 @@ async function forwardToWebhook(payload: unknown) {
           }
         : {}),
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(payloadForWebhook(payload)),
   });
 
   if (!response.ok) {
     throw new Error(`Validation webhook returned ${response.status}`);
+  }
+
+  const responseText = await response.text();
+
+  if (responseText) {
+    const responsePayload = JSON.parse(responseText) as { ok?: boolean; error?: string };
+
+    if (responsePayload.ok === false) {
+      throw new Error(responsePayload.error || "Validation webhook rejected the request.");
+    }
   }
 
   return {
